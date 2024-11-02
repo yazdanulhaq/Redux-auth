@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, logout } from '../actions/authActions';
 import { useNavigate } from 'react-router-dom';
+import Profile from '../components/Profile';
 import './Login.css';
 
 const Login = () => {
@@ -28,30 +29,36 @@ const Login = () => {
     }, [isAuthenticated, navigate]);
 
     return (
-        <div className="container">
+        <div className="login-container">
             <h1>{isAuthenticated ? `${user}'s Profile` : 'Login Page'}</h1>
             {isAuthenticated ? (
-                <button onClick={handleLogout}>Logout</button>
+                <button className="logout-btn" onClick={handleLogout}>Logout</button>
             ) : (
-                <form onSubmit={handleSubmit}>
-                    <label>Username:</label>
-                    <input 
-                        type="text" 
-                        value={username} 
-                        onChange={(e) => setUsername(e.target.value)} 
-                        required 
-                    />
-                    <label>Password:</label>
-                    <input 
-                        type="password" 
-                        value={password} 
-                        onChange={(e) => setPassword(e.target.value)} 
-                        required 
-                    />
-                    <button type="submit" disabled={loading}>
+                <form className="login-form" onSubmit={handleSubmit}>
+                    <div className="input-group">
+                        <label htmlFor="username">Username:</label>
+                        <input 
+                            type="text" 
+                            id="username"
+                            value={username} 
+                            onChange={(e) => setUsername(e.target.value)} 
+                            required 
+                        />
+                    </div>
+                    <div className="input-group">
+                        <label htmlFor="password">Password:</label>
+                        <input 
+                            type="password" 
+                            id="password"
+                            value={password} 
+                            onChange={(e) => setPassword(e.target.value)} 
+                            required 
+                        />
+                    </div>
+                    <button type="submit" className="login-btn" disabled={loading}>
                         {loading ? 'Logging in...' : 'Login'}
                     </button>
-                    {error && <p className="error">{error}</p>}
+                    {error && <p className="error-msg">{error}</p>}
                 </form>
             )}
         </div>
