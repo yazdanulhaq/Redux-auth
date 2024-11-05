@@ -31,7 +31,7 @@ export const fetchPosts = () => async (dispatch) => {
 export const fetchPostDetail = (postId) => async (dispatch) => {
     dispatch({ type: POST_REQUEST });
     try {
-        const response = await fetch(`/api/https://dummyjson.com/posts/${postId}`);
+        const response = await fetch(`https://dummyjson.com/posts/${postId}`);
         const data = await response.json();
         dispatch({ type: POST_SUCCESS, payload: data });
     } catch (error) {
