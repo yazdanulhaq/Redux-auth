@@ -1,18 +1,17 @@
-// postReducer.js
 import { POST_REQUEST, POST_SUCCESS, POST_FAILURE } from '../actions/actionTypes';
 
 const initialState = {
     loading: false,
-    posts: [],
+    post: null,
     error: null,
 };
 
-const postReducer = (state = initialState, action) => {
+const postDetailReducer = (state = initialState, action) => {
     switch (action.type) {
         case POST_REQUEST:
             return { ...state, loading: true };
         case POST_SUCCESS:
-            return { ...state, loading: false, posts: action.payload, error: null };
+            return { ...state, loading: false, post: action.payload, error: null };
         case POST_FAILURE:
             return { ...state, loading: false, error: action.error };
         default:
@@ -20,4 +19,4 @@ const postReducer = (state = initialState, action) => {
     }
 };
 
-export default postReducer;
+export default postDetailReducer;

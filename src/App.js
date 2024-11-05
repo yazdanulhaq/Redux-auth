@@ -4,6 +4,7 @@ import Login from './components/Login';
 import Profile from './components/Profile';
 import Posts from './components/Posts';
 import Products from './components/Products';
+import PostDetail from './components/PostDetail';
 
 
 
@@ -14,6 +15,8 @@ const App = () => {
             <Route path="/Profile" element={<Profile />} />
             <Route path="/Posts" element={<Posts />} />
             <Route path="/Products" element={<Products />} />
+            <Route path="/post/:postId" element={<PostDetail />} />
+
         </Routes>
     );
 };
