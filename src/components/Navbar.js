@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../actions/authActions';
 import './Navbar.css';
 import Login from './Login';
 import Profile from './Profile';
@@ -11,6 +12,11 @@ const Navbar = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const user = useSelector((state) => state.auth.user);
+
+    const handleLogout = () => {
+        navigate('/Login');
+    };
+
 
     return (
         <nav className="navbar">
@@ -28,11 +34,14 @@ const Navbar = () => {
                     <li><NavLink to="/products" className="nav-link">Products</NavLink></li>
                     {user && (
                         <li>
-                            <NavLink to="/profilepage" className="nav-link user-link">
+                            <NavLink to="/profile" className="nav-link user-link">
                                 {user.firstName} {user.lastName}
                             </NavLink>
                         </li>
                     )}
+                        <li>
+                        <button onClick={logout} className="logout-button">Logout</button>
+                    </li>
                 </ul>
             </div>
         </nav>

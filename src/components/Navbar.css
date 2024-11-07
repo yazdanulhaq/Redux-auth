@@ -40,6 +40,7 @@
     gap: 1rem;
     align-items: center;
     transition: transform 0.3s ease;
+    margin-left: 821px;
 }
 
 .navbar-menu li {
@@ -63,6 +64,15 @@
     color: #ff4081;
     font-weight: bold;
     text-transform: uppercase;
+}
+.logout-button {
+    background-color: #ff4081; /* Button color */
+    color: #ffffff; /* Button text color */
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 /* Responsive for Mobile */

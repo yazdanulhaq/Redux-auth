@@ -36,7 +36,6 @@ const PostDetail = () => {
                     <p>{post.body}</p>
                 </div>
             )}
-            <button onClick={handleGoToPosts} className='card-btn2'>Go to Post</button>
             <style>
                 {`
           .post-detail-container {

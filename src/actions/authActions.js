@@ -3,6 +3,7 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const LOGOUT = 'LOGOUT';
 
+
 export const login = (username, password) => {
     return async (dispatch) => {
         dispatch({ type: LOGIN_REQUEST });
@@ -21,7 +22,7 @@ export const login = (username, password) => {
             }
 
             const data = await response.json();
-            dispatch({ type: LOGIN_SUCCESS, payload: { username: data.username } });
+            dispatch({ type: LOGIN_SUCCESS, payload: { username: data } });
         } catch (error) {
             dispatch({ type: LOGIN_FAILURE, error: error.message });
         }

@@ -4,22 +4,19 @@ import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
   const { loading, error, isAuthenticated, user } = useSelector(state => state.auth);
-  console.log("user",user)
-    const navigate = useNavigate();
+  console.log("user", user)
+  const navigate = useNavigate();
 
-    const goToPost = () => {
-        navigate('/posts');
-    };
+  const goToPost = () => {
+    navigate('/posts');
+  };
 
-    return (
-        <div className="profile-container">
-            <h1>Welcome to your profile, {user.name}!</h1>
-            <p>This is your profile page.</p>
-            <button className="btn-go-to-post" onClick={goToPost}>
-                Go to Posts
-            </button>
-            <style>
-                {`
+  return (
+    <div className="profile-container">
+      <h1>Welcome to your profile, {user.username}!</h1>
+      <p>This is your profile page.</p>
+      <style>
+        {`
           .profile-container {
             display: flex;
             flex-direction: column;
@@ -41,9 +38,9 @@ const Profile = () => {
             background-color: #3e8e41;
           }
         `}
-            </style>
-        </div>
-    );
+      </style>
+    </div>
+  );
 };
 
 export default Profile;

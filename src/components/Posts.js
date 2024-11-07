@@ -24,7 +24,6 @@ const Posts = () => {
     return (
         <div className="container">
             <h1 className="title">Posts</h1>
-            <button onClick={handleGoToProducts} className='card-btn'>Go to Products</button>
             {loading && <p>Loading...</p>}
             {error && <p>Error: {error}</p>}
             <div className="posts-grid">

@@ -35,9 +35,6 @@ const ProductDetail = () => {
           <img src={product.thumbnail} alt="product image" className="product-image" />
           <h3 className="product-title">{product.title}</h3>
           <p className="product-description">{product.description}</p>
-          <button onClick={handleGoToProduct} className="card-btn2">
-            Go to Products
-          </button>
         </div>
       )}
       <style>
