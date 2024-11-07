@@ -3,7 +3,8 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
-    const { user } = useSelector((state) => state.auth);
+  const { loading, error, isAuthenticated, user } = useSelector(state => state.auth);
+  console.log("user",user)
     const navigate = useNavigate();
 
     const goToPost = () => {

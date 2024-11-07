@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, logout } from '../actions/authActions';
 import { useNavigate } from 'react-router-dom';
-import Profile from '../components/Profile';
 import './Login.css';
 
 const Login = () => {

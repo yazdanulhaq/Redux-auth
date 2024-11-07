@@ -14,7 +14,10 @@ const Products = () => {
     }, [dispatch]);
 
     const handleGoToPosts = () => {
-        navigate('/Posts'); // Navigate to Card.js page
+        navigate('/Posts');
+    };
+    const handleProductClick = (productId) => {
+        navigate(`/product/${productId}`);
     };
 
     console.log("products :: ", products)
@@ -28,8 +31,14 @@ const Products = () => {
                 {products?.products?.length > 0 ? (
                     products.products.map((product, index) => (
                         <div key={index} className="post-card">
+                             <div
+                            key={product.id}
+                            className="product-card"
+                            onClick={() => handleProductClick(product.id)}
+                        >
                             <img src={product.thumbnail} alt="prduct image" />
                             <h3 className="post-title">{product.title}</h3>
+                        </div>
                         </div>
                     ))
                 ) : (
