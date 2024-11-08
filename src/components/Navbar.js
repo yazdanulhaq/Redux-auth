@@ -21,7 +21,7 @@ const Navbar = () => {
                 <label htmlFor="menuToggle" className="menu-icon">&#9776;</label>
                 <ul className="navbar-menu">
                     {!user && (
-                        <li><NavLink to="/login" className="nav-link">Login</NavLink></li>
+                        <li><NavLink to="/" className="nav-link">Login</NavLink></li>
                     )}
                     {user && (
                         <li><NavLink to="/profile" className="nav-link">Profile</NavLink></li>
