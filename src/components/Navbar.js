@@ -3,18 +3,14 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../actions/authActions';
 import './Navbar.css';
-import Login from './Login';
-import Profile from './Profile';
-import Posts from './Posts';
-import Products from './Products';
 
 const Navbar = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const user = useSelector((state) => state.auth.user);
-
+    console.log("user : ", user)
     const handleLogout = () => {
-        navigate('/Login');
+        dispatch(logout(navigate));
     };
 
 
@@ -25,23 +21,27 @@ const Navbar = () => {
                 <label htmlFor="menuToggle" className="menu-icon">&#9776;</label>
                 <ul className="navbar-menu">
                     {!user && (
-                        <>
-                            <li><NavLink to="/login" className="nav-link">Login</NavLink></li>
-                            <li><NavLink to="/profile" className="nav-link">Profile</NavLink></li>
-                        </>
+                        <li><NavLink to="/login" className="nav-link">Login</NavLink></li>
                     )}
+                    {user && (
+                        <li><NavLink to="/profile" className="nav-link">Profile</NavLink></li>
+                    )}
+
                     <li><NavLink to="/posts" className="nav-link">Posts</NavLink></li>
                     <li><NavLink to="/products" className="nav-link">Products</NavLink></li>
+
                     {user && (
-                        <li>
-                            <NavLink to="/profile" className="nav-link user-link">
-                                {user.firstName} {user.lastName}
-                            </NavLink>
-                        </li>
+                        <>
+                            <li>
+                                <NavLink to="/profile" className="nav-link user-link">
+                                    {user.firstName} {user.lastName}
+                                </NavLink>
+                            </li>
+                            <li>
+                                <button onClick={handleLogout} className="logout-button">Logout</button>
+                            </li>
+                        </>
                     )}
-                        <li>
-                        <button onClick={logout} className="logout-button">Logout</button>
-                    </li>
                 </ul>
             </div>
         </nav>

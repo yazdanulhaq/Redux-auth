@@ -29,8 +29,9 @@ export const login = (username, password) => {
     };
 };
 
-export const logout = () => {
+export const logout = (navigate) => {
     return (dispatch) => {
         dispatch({ type: LOGOUT });
+        navigate('/');
     };
 };
