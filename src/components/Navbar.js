@@ -3,19 +3,17 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../actions/authActions';
 import './Navbar.css';
-import Login from './Login';
-import Profile from './Profile';
-import Posts from './Posts';
-import Products from './Products';
 
 const Navbar = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const user = useSelector((state) => state.auth.user);
+  
 
     const handleLogout = () => {
+        dispatch(logout());
         navigate('/Login');
-    };
+      };
 
 
     return (
@@ -26,7 +24,7 @@ const Navbar = () => {
                 <ul className="navbar-menu">
                     {!user && (
                         <>
-                            <li><NavLink to="/login" className="nav-link">Login</NavLink></li>
+                            <li><NavLink to="/Login" className="nav-link">Login</NavLink></li>
                             <li><NavLink to="/profile" className="nav-link">Profile</NavLink></li>
                         </>
                     )}
@@ -40,8 +38,10 @@ const Navbar = () => {
                         </li>
                     )}
                         <li>
-                        <button onClick={logout} className="logout-button">Logout</button>
-                    </li>
+            <button onClick={handleLogout} className="logout-button">
+              Logout
+            </button>
+          </li>
                 </ul>
             </div>
         </nav>
@@ -49,3 +49,9 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
+
+    
+
+         
