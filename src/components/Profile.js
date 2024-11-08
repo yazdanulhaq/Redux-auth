@@ -1,6 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import './Profile.css';
+
 
 const Profile = () => {
   const { loading, error, isAuthenticated, user } = useSelector(state => state.auth);
@@ -13,32 +15,13 @@ const Profile = () => {
 
   return (
     <div className="profile-container">
-      <h1>Welcome to your profile, {user.username}!</h1>
-      <p>This is your profile page.</p>
-      <style>
-        {`
-          .profile-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-          }
-          .btn-go-to-post {
-            background-color: #4CAF50;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-          }
-          .btn-go-to-post:hover {
-            background-color: #3e8e41;
-          }
-        `}
-      </style>
+      <div style={{ textAlign: "center", marginBottom: "10px" }}>
+        <img src={user.image} alt="user profile" style={{ borderRadius: "66px" }} />
+      </div>
+      <h1>Welcome to your profile,<b> {user.username}</b></h1>
+      <h3>USER Gender:- <b>{user.gender}</b></h3>
+      <h1>USER EMAIL:- <br /> <b>{user.email}</b></h1>
+      <h4>This is your profile page.</h4>
     </div>
   );
 };

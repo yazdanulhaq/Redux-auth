@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../actions/authActions';
+import redux from './redux.svg';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -17,16 +18,13 @@ const Navbar = () => {
     return (
         <nav className="navbar">
             <div className="navbar-container">
+            <img src={redux} alt="Brand Logo" className="navbar-logo" />
                 <input type="checkbox" id="menuToggle" />
                 <label htmlFor="menuToggle" className="menu-icon">&#9776;</label>
                 <ul className="navbar-menu">
                     {!user && (
                         <li><NavLink to="/" className="nav-link">Login</NavLink></li>
                     )}
-                    {user && (
-                        <li><NavLink to="/profile" className="nav-link">Profile</NavLink></li>
-                    )}
-
                     <li><NavLink to="/posts" className="nav-link">Posts</NavLink></li>
                     <li><NavLink to="/products" className="nav-link">Products</NavLink></li>
 
