@@ -21,8 +21,8 @@ export const login = (username, password) => {
                 throw new Error('Failed to login');
             }
 
-            const data = await response.json();
-            dispatch({ type: LOGIN_SUCCESS, payload: { username: data } });
+            const user = await response.json();
+            dispatch({ type: LOGIN_SUCCESS, payload: { user: user } });
         } catch (error) {
             dispatch({ type: LOGIN_FAILURE, error: error.message });
         }
@@ -35,3 +35,9 @@ export const logout = (navigate) => {
         navigate('/');
     };
 };
+
+export const handleGoogleUser = (user) => {
+    return (dispatch) => {
+        dispatch({ type: LOGIN_SUCCESS, payload: { user: user } });
+    };
+}

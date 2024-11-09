@@ -31,8 +31,8 @@ const Navbar = () => {
                     {user && (
                         <>
                             <li>
-                                <NavLink to="/profile" className="nav-link user-link">
-                                    {user.firstName} {user.lastName}
+                                <NavLink to="/Profile" className="nav-link user-link">
+                                    {user.firstName + " "+ user.lastName}
                                 </NavLink>
                             </li>
                             <li>
