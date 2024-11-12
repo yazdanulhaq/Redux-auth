@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { fetchProducts } from '../actions/productActions';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import './Posts.css';
+import './Products.css';
 
 const Products = () => {
     const dispatch = useDispatch();
@@ -18,6 +18,9 @@ const Products = () => {
     };
     const handleProductClick = (productId) => {
         navigate(`/product/${productId}`);
+    };
+    const calculateDiscountedPrice = (price, discountPercentage) => {
+        return (price - price * (discountPercentage / 100)).toFixed(2);
     };
 
     console.log("products :: ", products)
@@ -37,6 +40,17 @@ const Products = () => {
                         >
                             <img src={product.thumbnail} alt="prduct image" />
                             <h3 className="post-title">{product.title}</h3>
+                            <p className="product-price">${product.price}</p>
+                                        <p className="product-discount">
+                                            Discounted Price: Rs{" "}
+                                            {calculateDiscountedPrice(
+                                                product.price,
+                                                product.discountPercentage
+                                            )}
+                                        </p>
+                                        <p className="product-discount-percentage">
+                                            Discount: {product.discountPercentage}%
+                                        </p>
                         </div>
                         </div>
                     ))

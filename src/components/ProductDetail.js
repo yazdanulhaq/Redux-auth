@@ -35,6 +35,10 @@ const ProductDetail = () => {
           <img src={product.thumbnail} alt="product image" className="product-image" />
           <h3 className="product-title">{product.title}</h3>
           <p className="product-description">{product.description}</p>
+          <div className="flex items-center justify-center">
+                <span className="line-through text-gray-400 mr-2">Rs.{product.price}</span>
+                <span className="text-sm">-{product.discountPercentage}%</span>
+              </div>
         </div>
       )}
       <style>
