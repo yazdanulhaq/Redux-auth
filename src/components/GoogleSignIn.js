@@ -27,7 +27,6 @@ const GoogleSignIn = () => {
         };
 
         const prodGoogleClientID = "291880767153-fmpkjena48d2fv4011p9vess6i14kc77.apps.googleusercontent.com"
-        console.log("Google :: ", window.google)
         if (window.google) {
             window.google.accounts.id.initialize({
                 client_id: prodGoogleClientID,

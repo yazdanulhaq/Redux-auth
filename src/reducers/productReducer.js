@@ -1,8 +1,11 @@
-import { PRODUCT_REQUEST, PRODUCT_SUCCESS, PRODUCT_FAILURE } from '../actions/productActions';
+import { PRODUCT_REQUEST, PRODUCT_SUCCESS, PRODUCT_FAILURE, UPDATE_SKIP, UPDATE_TOTAL } from '../actions/productActions';
 
 const initialState = {
     loading: false,
-    products: null,
+    products: [], // Initialize products as an empty array
+    total: 0, // Add a total field for the total product count
+    limit: 6,
+    skip: 0,
     error: null,
 };
 
@@ -10,17 +13,30 @@ const productActions = (state = initialState, action) => {
     switch (action.type) {
         case PRODUCT_REQUEST:
             return { ...state, loading: true, error: null };
+
         case PRODUCT_SUCCESS:
-            return { loading: false, products: action.payload.products, error: null };
+            return {
+                ...state,
+                loading: false,
+                products: action.payload.products.products,
+                total: action.payload.products.total,
+                limit: action.payload.products.limit,
+                skip: action.payload.products.skip,
+                error: null
+            };
+
         case PRODUCT_FAILURE:
             return { ...state, loading: false, error: action.error };
+
+        case UPDATE_SKIP:
+            return { ...state, skip: action.payload };
+
+        case UPDATE_TOTAL:
+            return { ...state, total: action.payload };
+
         default:
             return state;
     }
 };
 
 export default productActions;
-
-
-
-

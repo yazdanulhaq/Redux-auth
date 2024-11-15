@@ -1,12 +1,14 @@
 export const PRODUCT_REQUEST = 'PRODUCT_REQUEST';
 export const PRODUCT_SUCCESS = 'PRODUCT_SUCCESS';
 export const PRODUCT_FAILURE = 'PRODUCT_FAILURE';
+export const UPDATE_TOTAL = "UPDATE_TOTAL";
+export const UPDATE_SKIP = "UPDATE_SKIP";
 
-export const fetchProducts = () => {
+export const fetchProducts = (url, limit, skip) => {
     return async (dispatch) => {
         dispatch({ type: PRODUCT_REQUEST });
         try {
-            const response = await fetch('https://dummyjson.com/products', {
+            const response = await fetch(`https://dummyjson.com/${url}?limit=${limit}&skip=${skip}`, {
                 method: 'GET',
                 headers: { 'Content-Type': 'application/json' }
             });

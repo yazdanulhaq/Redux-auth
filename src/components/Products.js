@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { fetchProducts } from '../actions/productActions';
+import { fetchProducts, UPDATE_SKIP, UPDATE_TOTAL } from '../actions/productActions';
 import { useSelector, useDispatch, useStore } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import './Products.css';
@@ -9,14 +9,37 @@ const Products = () => {
     const navigate = useNavigate();
     const { loading, error, products } = useSelector(state => state.products || {});
 
+    const [url, setUrl] = useState('products')
+    const skip = useSelector((state) => state.products.skip);
+    const total = useSelector((state) => state.products.total);
+    const limit = useSelector((state) => state.products.limit);
+
+
+    const handleUpdateSkip = (newSkipValue) => {
+        dispatch({ type: UPDATE_SKIP, payload: newSkipValue });
+    };
+
+    const handleUpdateTotal = (newTotal) => {
+        dispatch({ type: UPDATE_TOTAL, payload: newTotal });
+    };
 
     const handleScroll = () => {
-        if(window.innerHeight + document.documentElement.scrollTop + 1 >= document.
-            documentElement.scrollHeight
+        if (
+            window.innerHeight + document.documentElement.scrollTop + 1 >=
+            document.documentElement.scrollHeight
         ) {
-            console.log("*********** API CALLS ************")
+            handleUpdateSkip(skip + products.length);
+            handleUpdateTotal(products.total);
+    
+            console.log("Current totalRecord:", total);
+            console.log("Fetch Product Count:", skip + products.length);
+    
+            if (total > skip) {
+                dispatch(fetchProducts(url, limit, skip));
+            } 
         }
     };
+    
 
     useEffect (() =>  {
         window.addEventListener("scroll" , handleScroll)
@@ -24,7 +47,7 @@ const Products = () => {
     },[]);
 
     useEffect(() => {
-        dispatch(fetchProducts());
+        dispatch(fetchProducts(url, limit, skip));
     }, [dispatch]);
 
 
@@ -41,8 +64,8 @@ const Products = () => {
             {loading && <p>Loading...</p>}
             {error && <p>Error: {error}</p>}
             <div className="posts-grid">
-                {products?.products?.length > 0 ? (
-                    products.products.map((product, index) => (
+                {products?.length > 0 ? (
+                    products?.map((product, index) => (
                         <div key={index} className="post-card">
                             <div
                                 key={product.id}
