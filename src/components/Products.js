@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { fetchProducts } from '../actions/productActions';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, useStore } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import './Products.css';
 
@@ -9,13 +9,25 @@ const Products = () => {
     const navigate = useNavigate();
     const { loading, error, products } = useSelector(state => state.products || {});
 
+
+    const handleScroll = () => {
+        if(window.innerHeight + document.documentElement.scrollTop + 1 >= document.
+            documentElement.scrollHeight
+        ) {
+            console.log("*********** API CALLS ************")
+        }
+    };
+
+    useEffect (() =>  {
+        window.addEventListener("scroll" , handleScroll)
+        return () => window.removeEventListener("scroll", handleScroll)
+    },[]);
+
     useEffect(() => {
         dispatch(fetchProducts());
     }, [dispatch]);
 
-    const handleGoToPosts = () => {
-        navigate('/Posts');
-    };
+
     const handleProductClick = (productId) => {
         navigate(`/product/${productId}`);
     };
@@ -23,7 +35,6 @@ const Products = () => {
         return (price - price * (discountPercentage / 100)).toFixed(2);
     };
 
-    console.log("products :: ", products)
     return (
         <div className="container">
             <h1 className="title">Products</h1>
@@ -33,25 +44,25 @@ const Products = () => {
                 {products?.products?.length > 0 ? (
                     products.products.map((product, index) => (
                         <div key={index} className="post-card">
-                             <div
-                            key={product.id}
-                            className="product-card"
-                            onClick={() => handleProductClick(product.id)}
-                        >
-                            <img src={product.thumbnail} alt="prduct image" />
-                            <h3 className="post-title">{product.title}</h3>
-                            <p className="product-price">${product.price}</p>
-                                        <p className="product-discount">
-                                            Discounted Price: Rs{" "}
-                                            {calculateDiscountedPrice(
-                                                product.price,
-                                                product.discountPercentage
-                                            )}
-                                        </p>
-                                        <p className="product-discount-percentage">
-                                            Discount: {product.discountPercentage}%
-                                        </p>
-                        </div>
+                            <div
+                                key={product.id}
+                                className="product-card"
+                                onClick={() => handleProductClick(product.id)}
+                            >
+                                <img src={product.thumbnail} alt="prduct image" />
+                                <h3 className="post-title">{product.title}</h3>
+                                <p className="product-price">${product.price}</p>
+                                <p className="product-discount">
+                                    Discounted Price: Rs{" "}
+                                    {calculateDiscountedPrice(
+                                        product.price,
+                                        product.discountPercentage
+                                    )}
+                                </p>
+                                <p className="product-discount-percentage">
+                                    Discount: {product.discountPercentage}%
+                                </p>
+                            </div>
                         </div>
                     ))
                 ) : (

@@ -21,6 +21,7 @@ const Posts = () => {
     const handlePostClick = (postId) => {
         navigate(`/post/${postId}`);
     };
+    
 
     return (
         <div className="container">
