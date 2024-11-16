@@ -7,13 +7,9 @@ import './Products.css';
 const Products = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { loading, error, products } = useSelector(state => state.products || {});
+    const { loading, error, products, skip, limit, total } = useSelector(state => state.products || {});
 
     const [url, setUrl] = useState('products')
-    const skip = useSelector((state) => state.products.skip);
-    const total = useSelector((state) => state.products.total);
-    const limit = useSelector((state) => state.products.limit);
-
 
     const handleUpdateSkip = (newSkipValue) => {
         dispatch({ type: UPDATE_SKIP, payload: newSkipValue });

@@ -18,11 +18,13 @@ const productActions = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                products: action.payload.products.products,
+                products: state.products.length > 0
+                    ? [...state.products, ...action.payload.products.products]
+                    : action.payload.products.products,
                 total: action.payload.products.total,
-                limit: action.payload.products.limit,
-                skip: action.payload.products.skip,
-                error: null
+                limit: action.payload.products.limit || state.limit, // Update or keep default
+                skip: action.payload.products.skip || state.skip,   // Update or keep default
+                error: null,
             };
 
         case PRODUCT_FAILURE:
