@@ -11,17 +11,21 @@ const Products = () => {
 
 
     const pageRef = useRef(page);
+    const totalRef = useRef(total);
+    const limitRef = useRef(limit);
 
     useEffect(() => {
         pageRef.current = page;
-    }, [page]);
+        totalRef.current = total;
+        limitRef.current = limit;
+    }, [page, total, limit]);
 
     const handleScroll = () => {
         if (
             window.innerHeight + document.documentElement.scrollTop + 1 >=
             document.documentElement.scrollHeight
         ) {
-            if (!loading && pageRef.current < Math.ceil(total / limit)) {
+            if (!loading && pageRef.current < Math.ceil(totalRef.current / limitRef.current)) {
                 const nextPage = pageRef.current + 1;
                 dispatch(setPage(nextPage));
             }
