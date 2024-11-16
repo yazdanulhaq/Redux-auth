@@ -1,11 +1,11 @@
-import { PRODUCT_REQUEST, PRODUCT_SUCCESS, PRODUCT_FAILURE, UPDATE_SKIP, UPDATE_TOTAL } from '../actions/productActions';
+import { PRODUCT_REQUEST, PRODUCT_SUCCESS, PRODUCT_FAILURE, SET_PAGE } from '../actions/productActions';
 
 const initialState = {
+    products: [],
+    total: 0,
+    page: 1,
+    limit: 10,
     loading: false,
-    products: [], // Initialize products as an empty array
-    total: 0, // Add a total field for the total product count
-    limit: 6,
-    skip: 0,
     error: null,
 };
 
@@ -17,24 +17,19 @@ const productActions = (state = initialState, action) => {
         case PRODUCT_SUCCESS:
             return {
                 ...state,
-                loading: false,
-                products: state.products.length > 0
-                    ? [...state.products, ...action.payload.products.products]
-                    : action.payload.products.products,
-                total: action.payload.products.total,
-                limit: action.payload.products.limit || state.limit, // Update or keep default
-                skip: action.payload.products.skip || state.skip,   // Update or keep default
-                error: null,
+                products: state.page === 1
+                    ? action.payload.products 
+                    : [...state.products, ...action.payload.products],
+                total: action.payload.total,
+                loading: false
             };
 
         case PRODUCT_FAILURE:
             return { ...state, loading: false, error: action.error };
 
-        case UPDATE_SKIP:
-            return { ...state, skip: action.payload };
-
-        case UPDATE_TOTAL:
-            return { ...state, total: action.payload };
+        case SET_PAGE:
+            console.log("Updating Page:", action.payload);
+            return { ...state, page: action.payload };
 
         default:
             return state;

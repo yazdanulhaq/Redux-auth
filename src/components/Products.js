@@ -1,50 +1,47 @@
-import React, { useEffect, useState } from 'react';
-import { fetchProducts, UPDATE_SKIP, UPDATE_TOTAL } from '../actions/productActions';
-import { useSelector, useDispatch, useStore } from 'react-redux';
+import React, { useEffect, useRef } from 'react';
+import { fetchProducts, setPage } from '../actions/productActions';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import './Products.css';
 
 const Products = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { loading, error, products, skip, limit, total } = useSelector(state => state.products || {});
+    const { products, total, page, limit, loading, error } = useSelector((state) => state.products);
 
-    const [url, setUrl] = useState('products')
 
-    const handleUpdateSkip = (newSkipValue) => {
-        dispatch({ type: UPDATE_SKIP, payload: newSkipValue });
-    };
+    const pageRef = useRef(page);
 
-    const handleUpdateTotal = (newTotal) => {
-        dispatch({ type: UPDATE_TOTAL, payload: newTotal });
-    };
+    useEffect(() => {
+        pageRef.current = page;
+    }, [page]);
 
     const handleScroll = () => {
         if (
             window.innerHeight + document.documentElement.scrollTop + 1 >=
             document.documentElement.scrollHeight
         ) {
-            handleUpdateSkip(skip + products.length);
-            handleUpdateTotal(products.total);
-    
-            console.log("Current totalRecord:", total);
-            console.log("Fetch Product Count:", skip + products.length);
-    
-            if (total > skip) {
-                dispatch(fetchProducts(url, limit, skip));
-            } 
+            console.log( page, limit)
+            if (!loading && page < Math.ceil(total / limit)) {
+                const nextPage = pageRef.current + 1;
+                dispatch(setPage(nextPage));
+            } else {
+                console.log("else")
+            }
         }
     };
-    
 
-    useEffect (() =>  {
-        window.addEventListener("scroll" , handleScroll)
-        return () => window.removeEventListener("scroll", handleScroll)
-    },[]);
 
     useEffect(() => {
-        dispatch(fetchProducts(url, limit, skip));
-    }, [dispatch]);
+        window.addEventListener("scroll", handleScroll)
+        return () => window.removeEventListener("scroll", handleScroll)
+    }, []);
+
+    useEffect(() => {
+        if (page) {
+          dispatch(fetchProducts(page, limit)); // Fetch products for the current page
+        }
+      }, [dispatch, page, limit]);
 
 
     const handleProductClick = (productId) => {
