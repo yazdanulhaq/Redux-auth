@@ -3,6 +3,7 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const LOGOUT = 'LOGOUT';
 
+
 export const login = (username, password) => {
     return async (dispatch) => {
         dispatch({ type: LOGIN_REQUEST });
@@ -20,16 +21,23 @@ export const login = (username, password) => {
                 throw new Error('Failed to login');
             }
 
-            const data = await response.json();
-            dispatch({ type: LOGIN_SUCCESS, payload: { username: data.username } });
+            const user = await response.json();
+            dispatch({ type: LOGIN_SUCCESS, payload: { user: user } });
         } catch (error) {
             dispatch({ type: LOGIN_FAILURE, error: error.message });
         }
     };
 };
 
-export const logout = () => {
+export const logout = (navigate) => {
     return (dispatch) => {
         dispatch({ type: LOGOUT });
+        navigate('/');
     };
 };
+
+export const handleGoogleUser = (user) => {
+    return (dispatch) => {
+        dispatch({ type: LOGIN_SUCCESS, payload: { user: user } });
+    };
+}

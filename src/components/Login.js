@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, logout } from '../actions/authActions';
 import { useNavigate } from 'react-router-dom';
-import Profile from '../components/Profile';
+import GoogleSignIn from './GoogleSignIn';
 import './Login.css';
 
 const Login = () => {
@@ -24,7 +24,7 @@ const Login = () => {
 
     useEffect(() => {
         if (isAuthenticated) {
-            navigate('/profile'); // Redirect to profile page if logged in
+            navigate('/Profile'); // Redirect to profile page if logged in
         }
     }, [isAuthenticated, navigate]);
 
@@ -61,6 +61,7 @@ const Login = () => {
                     {error && <p className="error-msg">{error}</p>}
                 </form>
             )}
+<GoogleSignIn />
         </div>
     );
 };
