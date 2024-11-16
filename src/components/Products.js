@@ -21,12 +21,9 @@ const Products = () => {
             window.innerHeight + document.documentElement.scrollTop + 1 >=
             document.documentElement.scrollHeight
         ) {
-            console.log( page, limit)
-            if (!loading && page < Math.ceil(total / limit)) {
+            if (!loading && pageRef.current < Math.ceil(total / limit)) {
                 const nextPage = pageRef.current + 1;
                 dispatch(setPage(nextPage));
-            } else {
-                console.log("else")
             }
         }
     };
@@ -39,7 +36,7 @@ const Products = () => {
 
     useEffect(() => {
         if (page) {
-          dispatch(fetchProducts(page, limit)); // Fetch products for the current page
+          dispatch(fetchProducts(page, limit));
         }
       }, [dispatch, page, limit]);
 
