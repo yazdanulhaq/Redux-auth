@@ -35,10 +35,10 @@ const Products = () => {
     }, []);
 
     useEffect(() => {
-        if (page) {
-          dispatch(fetchProducts(page, limit));
+        if (pageRef.current) {
+          dispatch(fetchProducts(pageRef.current, limitRef.current));
         }
-      }, [dispatch, page, limit]);
+      }, [dispatch, pageRef.current, limitRef.current]);
 
 
     const handleProductClick = (productId) => {
