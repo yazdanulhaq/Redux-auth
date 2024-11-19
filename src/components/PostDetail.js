@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPostDetail } from '../actions/postActions';
-import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { FaEye, FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
 import './PostDetail.css';
@@ -9,16 +8,13 @@ import './PostDetail.css';
 const PostDetail = () => {
     const { postId } = useParams();
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const { loading, error, post } = useSelector((state) => state.postDetail || {});
 
     useEffect(() => {
         dispatch(fetchPostDetail(postId));
     }, [dispatch, postId]);
 
-    const handleGoToPosts = () => {
-        navigate('/Posts');
-    };
+    console.log("post :: ", post)
 
     return (
         <div className="post-detail-container">

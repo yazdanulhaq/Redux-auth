@@ -4,7 +4,7 @@ const initialState = {
     products: [],
     total: 0,
     page: 1,
-    limit: 10,
+    limit: 6,
     loading: false,
     error: null,
 };

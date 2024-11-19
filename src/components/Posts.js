@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPosts } from '../actions/postActions';
+import { fetchPosts ,setPage } from '../actions/postActions';
 import { useNavigate } from 'react-router-dom';
 import { FaEye, FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
 import './Posts.css';
@@ -8,15 +8,41 @@ import './Posts.css';
 const Posts = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { loading, error, posts } = useSelector((state) => state.posts || {});
+    const { posts, total, page, limit, loading, error } = useSelector((state) => state.posts);
+
+    const pageRef = useRef(page);
+    const totalRef = useRef(total);
+    const limitRef = useRef(limit);
 
     useEffect(() => {
-        dispatch(fetchPosts());
-    }, [dispatch]);
+        pageRef.current = page;
+        totalRef.current = total;
+        limitRef.current = limit;
+    }, [page, total, limit]);
 
-    const handleGoToProducts = () => {
-        navigate('/Products');
+    const handleScroll = () => {
+        if (
+            window.innerHeight + document.documentElement.scrollTop + 1 >=
+            document.documentElement.scrollHeight
+        ) {
+            if (!loading && pageRef.current < Math.ceil(totalRef.current / limitRef.current)) {
+                const nextPage = pageRef.current + 1;
+                dispatch(setPage(nextPage));
+            }
+        }
     };
+
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll)
+        return () => window.removeEventListener("scroll", handleScroll)
+    }, []);
+
+    useEffect(() => {
+        if (page) {
+          dispatch(fetchPosts(page, limit));
+        }
+      }, [dispatch, page, limit]);
+
 
     const handlePostClick = (postId) => {
         navigate(`/post/${postId}`);
@@ -29,8 +55,8 @@ const Posts = () => {
             {loading && <p>Loading...</p>}
             {error && <p>Error: {error}</p>}
             <div className="posts-grid">
-                {posts?.posts?.length > 0 ? (
-                    posts?.posts?.map((post) => (
+                {posts.length > 0 ? (
+                    posts.map((post) => (
                         <div
                             key={post.id}
                             className="post-card"
