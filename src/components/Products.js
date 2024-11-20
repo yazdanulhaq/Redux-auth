@@ -9,8 +9,11 @@ const Products = () => {
     const navigate = useNavigate();
     const { products, total, page, limit, loading, error } = useSelector((state) => state.products);
 
+  
+
 
     const pageRef = useRef(page);
+    const limitRef = useRef(limit);
 
     useEffect(() => {
         pageRef.current = page;
