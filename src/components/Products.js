@@ -9,23 +9,22 @@ const Products = () => {
     const navigate = useNavigate();
     const { products, total, page, limit, loading, error } = useSelector((state) => state.products);
 
+  
+
 
     const pageRef = useRef(page);
-    const totalRef = useRef(total);
     const limitRef = useRef(limit);
 
     useEffect(() => {
         pageRef.current = page;
-        totalRef.current = total;
-        limitRef.current = limit;
-    }, [page, total, limit]);
+    }, [page]);
 
     const handleScroll = () => {
         if (
             window.innerHeight + document.documentElement.scrollTop + 1 >=
             document.documentElement.scrollHeight
         ) {
-            if (!loading && pageRef.current < Math.ceil(totalRef.current / limitRef.current)) {
+            if (!loading && pageRef.current < Math.ceil(total / limit)) {
                 const nextPage = pageRef.current + 1;
                 dispatch(setPage(nextPage));
             }
