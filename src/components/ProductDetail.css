@@ -1,48 +1,97 @@
 .product-detail-container {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  .loading-spinner {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100px;
-  }
-  .error-message {
-    color: red;
-    font-weight: bold;
-    text-align: center;
-  }
-  .product-detail {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .product-image {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 10px;
-  }
-  .product-title {
-    font-weight: bold;
-    color: #333;
-  }
-  .product-description {
-    color: #666;
-  }
-  .card-btn2 {
-    background-color: #4CAF50;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  .card-btn2:hover {
-    background-color: #3e8e41;
-  }
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.loading-spinner, .error-message {
+  text-align: center;
+  padding: 20px;
+  font-size: 18px;
+  color: #555;
+}
+
+.product-detail-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.product-image {
+  width: 250px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.product-summary {
+  flex: 1;
+}
+
+.product-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.product-category, .product-brand {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.product-pricing {
+  margin-top: 10px;
+}
+
+.discounted-price {
+  font-size: 20px;
+  color: #0284c7;
+  font-weight: bold;
+}
+
+.original-price {
+  font-size: 16px;
+  color: #888;
+}
+
+.line-through {
+  text-decoration: line-through;
+}
+
+.product-detail-body {
+  margin-top: 20px;
+}
+
+.product-description {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.product-stock {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.product-rating {
+  font-size: 16px;
+  color: #ff9900;
+}
+
+.rating-stars {
+  color: #ffcc00;
+}
+.custom-style {
+  display: inline-block;
+  background-color: #e5e7eb; 
+  border-radius: 9999px; 
+  padding: 0.25rem 0.75rem; 
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+  margin-right: 0.5rem;
+  margin-top: 28px;
+}
