@@ -84,3 +84,14 @@
 .rating-stars {
   color: #ffcc00;
 }
+.custom-style {
+  display: inline-block;
+  background-color: #e5e7eb; 
+  border-radius: 9999px; 
+  padding: 0.25rem 0.75rem; 
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+  margin-right: 0.5rem;
+  margin-top: 28px;
+}

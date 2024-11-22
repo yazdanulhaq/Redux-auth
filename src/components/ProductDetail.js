@@ -51,16 +51,11 @@ const ProductDetail = () => {
                     ({product.discountPercentage}% off)
                   </span>
                 </div>
-                <div className="flex ml-10 items-center mt-4">
-                  <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
-                    #{product.brand}
-                  </span>
-                  <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
-                    #{product.category}
-                  </span>
+                <div class="flex ml-10 items-center mt-4">
+                  <span className="custom-style">{product.brand}</span>
+                  <span className="custom-style">{product.category}</span>
+                  <span className="custom-style">{product.category}</span>
                 </div>
-
-
               </div>
             </div>
           </div>
